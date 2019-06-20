@@ -14,14 +14,16 @@ Future things to do? -
     Will connect it to a live database and query.
 '''
 
+#importing libraries
 import json
 from difflib import get_close_matches
 
+#defining our main function
 def translate(word):
     word = word.lower()
-    if word in data:
+    if word in data: 
         return data[word]
-    elif len(get_close_matches(word, data.keys())) > 0:
+    elif len(get_close_matches(word, data.keys())) > 0: #get_close_matches is a magic function which finds the similar words to the given query
         ans = input("Did you mean %s instead? Enter Y/N \n" % get_close_matches(word, data.keys())[0])
         if ans.lower() == "y":
             return data[get_close_matches(word, data.keys())[0]]
@@ -32,9 +34,10 @@ def translate(word):
     else:
         return "Please enter a valid word"
 
-data = json.load(open("data.json", 'r'))
+
+data = json.load(open("data.json", 'r')) #loading json data into a variable called Data
 word = input("Enter word: ")
-out = (translate(word))
+out = (translate(word)) 
 
 if type(out) == list:
     for item in out:
